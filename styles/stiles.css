@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: #000000; }
+
+body {
+  background-image: url("../images/blurred-background-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Segoe UI Webfont",-apple-system,"Helvetica Neue","Lucida Grande","Roboto","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Meiryo UI","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  display: block;
+  width: 100%; }
+  body .gandContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; }
+    body .gandContainer .inner {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 15%;
+      position: relative;
+      min-height: 338px;
+      min-width: 320px;
+      max-width: 440px;
+      width: calc(100% - 40px);
+      padding: 44px;
+      margin-bottom: 28px;
+      background-color: #fff;
+      -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      display: block;
+      box-sizing: border-box; }
+
+.margin-bottom-20 {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  box-sizing: border-box; }
+
+.margin-bottom-16 {
+  margin-top: 0px;
+  margin-bottom: 16px; }
+
+.logo {
+  max-width: 256px;
+  height: 24px;
+  padding: 0px;
+  -webkit-animation: animate-fadeIn;
+  -moz-animation: animate-fadeIn;
+  -o-animation: animate-fadeIn;
+  animation: animate-fadeIn; }
+
+img {
+  vertical-align: middle; }
+
+img {
+  border: 0; }
+
+.margin-bottom-16 {
+  margin-top: 0px;
+  margin-bottom: 16px; }
+
+.text-title, h3, .text-body, p {
+  color: #404040;
+  padding: 0px; }
+
+.text-title, h3 {
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  font-family: "Segoe UI","Helvetica Neue","Lucida Grande","Roboto","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Meiryo UI","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+  margin-left: 0px; }
+
+.row {
+  margin-left: -2px;
+  margin-right: -2px; }
+
+body div.placeholderContainer {
+  width: 100%;
+  position: relative;
+  float: left;
+  min-height: 1px;
+  padding-left: 2px;
+  padding-right: 2px; }
+
+input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], textarea {
+  border-style: solid;
+  border-color: #000;
+  border-color: rgba(0, 0, 0, 0.6);
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 1px;
+  border-radius: 0px;
+  padding: 6px 0px;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.4);
+  outline: none;
+  height: 36px; }
+
+.form-control {
+  display: block;
+  width: 100%;
+  background-image: none; }
+
+input {
+  line-height: normal; }
+
+button, input, optgroup, select, textarea {
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  margin: 0; }
+
+.text-secondary {
+  font-size: 0.8125rem; }
+
+a {
+  color: #0067B8;
+  text-decoration: none; }
+
+a {
+  background-color: transparent; }
+
+html[dir="ltr"] .button-container {
+  right: 44px;
+  text-align: right; }
+
+.no-margin-top-bottom {
+  margin-top: 0px;
+  margin-bottom: 0px; }
+
+.inline-block {
+  display: inline-block; }
+
+.button-container {
+  position: absolute;
+  bottom: 44px;
+  right: 10%; }
+
+.btn.btn-primary, button.btn-primary, input[type="button"].btn-primary, input[type="submit"].btn-primary, input[type="reset"].btn-primary {
+  border-color: #0067b8;
+  background-color: #0067b8;
+  color: #fff; }
+
+input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="button"].btn-block {
+  width: 100%; }
+
+.btn, button, input[type="button"], input[type="submit"], input[type="reset"] {
+  display: inline-block;
+  height: 32px;
+  min-width: 108px;
+  padding: 4px 12px 4px 12px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  touch-action: manipulation;
+  color: #000;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0px;
+  border-color: transparent;
+  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.2); }
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer; }
+
+.btn-block {
+  display: block;
+  width: 100%; }
+
+input {
+  line-height: normal; }
+
+button, input, optgroup, select, textarea {
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  margin: 0; }
+
+#footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  overflow: visible;
+  z-index: 99;
+  clear: both;
+  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.6); }
+
+div .footerNode {
+  margin: 0px; }
+
+div .footerNode a, div .footerNode span {
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 28px;
+  white-space: nowrap;
+  display: inline-block;
+  float: right;
+  margin-left: 8px;
+  margin-right: 8px; }
+
+.backBtn {
+  min-height: 24px;
+  width: 24px;
+  min-width: 24px;
+  float: left;
+  padding: 0;
+  background-color: #fff;
+  border-width: 0;
+  border-radius: 12px;
+  margin-right: 2px; }
+
+.identity {
+  line-height: 26px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.forgotPass {
+  margin-top: 10px; }
+
+/*# sourceMappingURL=stiles.css.map */
