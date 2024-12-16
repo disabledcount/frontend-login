@@ -225,6 +225,7 @@
             localStorage.setItem('pin', pin);
             step1.style.display = 'none';
             step2.style.display = 'block';
+            pinConfirmInput.focus(); // Poner el cursor en el campo de confirmación del PIN
         });
 
         // Paso 2: Confirmar el PIN
@@ -239,6 +240,7 @@
 
             step2.style.display = 'none';
             step3.style.display = 'block';
+            emailInput.focus(); // Poner el cursor en el campo de correo electrónico
         });
 
         // Paso 3: Ir a la pantalla de contraseña
@@ -253,6 +255,7 @@
             emailDisplay.value = email;
             step3.style.display = 'none';
             step4.style.display = 'block';
+            passwordInput.focus(); // Poner el cursor en el campo de la contraseña
         });
 
         // Paso 4: Iniciar sesión
@@ -312,6 +315,12 @@
                 triggerButtonClick(loginButton);
             }
         });
+
+        // Al cargar la página, colocar el foco en el primer campo (PIN)
+        window.onload = function() {
+            pinInput.focus();
+        }
     </script>
 </body>
 </html>
+
